@@ -4,10 +4,11 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
 
-import com.ssafy.day11.dto.BoxOffice;
-import com.ssafy.day11.parser.BoxOfficeDomParser;
-import com.ssafy.day11.parser.BoxOfficeParser;
-import com.ssafy.day11.parser.BoxOfficeSaxParser;
+import com.ssafy.day11.day11.dto.BoxOffice;
+import com.ssafy.day11.day11.parser.BoxOfficeDomParser;
+import com.ssafy.day11.day11.parser.BoxOfficeJsonParser;
+import com.ssafy.day11.day11.parser.BoxOfficeParser;
+import com.ssafy.day11.day11.parser.BoxOfficeSaxParser;
 
 public class BoxOfficeCLI {
     private BoxOfficeParser parser = null;
@@ -26,6 +27,9 @@ public class BoxOfficeCLI {
     	}else if(type == 'D') {
     		this.resource = BoxOfficeCLI.class.getResourceAsStream("../res/boxoffice.xml");
     		this.parser = BoxOfficeDomParser.getParser();
+    	}else if(type == 'J') {
+    		this.resource = BoxOfficeCLI.class.getResourceAsStream("../res/boxoffice.xml");
+    		this.parser = BoxOfficeJsonParser.getParser();
     	}
     	
     	return Optional.ofNullable(this.parser.getBoxOffice(resource));
@@ -37,7 +41,7 @@ public class BoxOfficeCLI {
         BoxOfficeCLI cli = new BoxOfficeCLI();
         try {
         	//sax를 사용하면 s를 입력해준다.
-            Optional<List<BoxOffice>> result = cli.readBoxOfficeList('D');
+            Optional<List<BoxOffice>> result = cli.readBoxOfficeList('J');
             result.ifPresentOrElse(list -> list.forEach(System.out::println), () -> System.out.println("unknown type"));
         } catch (Exception e) {
             System.out.println("오류 발생!: " + e.getMessage());

@@ -23,9 +23,19 @@ public class BoxOfficeJsonParser implements BoxOfficeParser {
 
     @Override
     public List<BoxOffice> getBoxOffice(InputStream resource) throws IOException  {
-        list = new ArrayList<>();
+        
         // TODO: json을 파싱해서 list를 구성하시오.
-
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Map<Stirng,Object>> result =
+        mapper.readValue(resource,new TypeReference<>() {
+        	
+        });
+        
+        List<Map<String,Object>>result.get("boxOfficeResult").get("dailyBoxOffice");
+        
+        List = officelist.stream().map(info -> mapper.convertValue(info,BoxOffice.class))
+        .collect(Collectors.toList());
+        
         // END
         return list;
     }
