@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<주소록>
+    <회원>
+        <name>diana</name>
+        <addr>seoul</addr>
+    </회원>
+    <회원>
+        <name>diem</name>
+        <addr>busan</addr>
+    </회원>    
+</주소록>
